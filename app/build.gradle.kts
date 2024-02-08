@@ -52,8 +52,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.compose.material:material-icons-extended")
     // Android Maps Compose composables for the Maps SDK for Android
-    implementation("com.google.maps.android:maps-compose:4.3.0")
+    implementation("com.google.maps.android:maps-compose:4.3.2")
     // Maps SDK for Android
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.core:core-ktx:1.12.0")

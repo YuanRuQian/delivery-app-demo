@@ -8,9 +8,9 @@ sealed class Screen(
     val displayName: String = route,
     val navArguments: List<NamedNavArgument> = emptyList(),
 ) {
-    data object AddressAutoComplete : Screen("addressAutoComplete")
+    data object AddressAutoComplete : Screen("Address Auto Complete")
 
-
+    data object CarouselScreen : Screen("Carousel")
 }
 
 

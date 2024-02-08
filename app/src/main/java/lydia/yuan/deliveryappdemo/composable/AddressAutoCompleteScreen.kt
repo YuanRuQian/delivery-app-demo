@@ -15,6 +15,7 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import androidx.compose.ui.Modifier
 
+// reference: https://stackoverflow.com/a/72586090/10340117
 @Composable
 fun AddressAutoCompleteScreen() {
     val singapore = LatLng(1.35, 103.87)
