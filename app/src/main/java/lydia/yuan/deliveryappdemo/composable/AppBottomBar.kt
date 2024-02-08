@@ -1,7 +1,6 @@
 package lydia.yuan.deliveryappdemo.composable
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MacroOff
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Recycling
 import androidx.compose.material3.Icon
@@ -36,7 +35,7 @@ fun AppBottomBar(navController: NavController, currentRoute: String, setCurrentR
     )
 
     val routes = listOf(
-        Screen.AddressAutoComplete.route,
+        Screen.NearestStoreScreen.route,
         Screen.CarouselScreen.route,
     )
 
