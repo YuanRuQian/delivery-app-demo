@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -23,10 +24,10 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
@@ -34,6 +35,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import lydia.yuan.deliveryappdemo.utils.haversine
 
 // TODO: https://github.com/android/platform-samples/blob/main/samples/location/src/main/java/com/example/platform/location/currentLocation/CurrentLocationScreen.kt
 @SuppressLint("MissingPermission")
@@ -115,18 +117,49 @@ fun NearestStoreScreen(currentLocation: Location, setCurrentLocation: (Location)
     val storesLocation = listOf(utah, texas, northCarolina)
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(currentLocation.latitude, currentLocation.longitude), 2f)
+        position = CameraPosition.fromLatLngZoom(
+            LatLng(
+                currentLocation.latitude,
+                currentLocation.longitude
+            ), 2f
+        )
+    }
+
+    val (nearestStore, setNearestStore) = remember {
+        mutableStateOf<LatLng?>(null)
     }
 
     LaunchedEffect(key1 = currentLocation) {
-        cameraPositionState.animate(
-            update = CameraUpdateFactory.newCameraPosition(
-                CameraPosition(LatLng(currentLocation.latitude, currentLocation.longitude), 10f, 0f, 0f)
-            ),
-            durationMs = 1000
+        val currentNearestStore = storesLocation.minByOrNull {
+            haversine(
+                currentLocation.latitude,
+                currentLocation.longitude,
+                it.latitude,
+                it.longitude
+            )
+        }
+
+        if (currentNearestStore != null) {
+            cameraPositionState.animate(
+                update = CameraUpdateFactory.newCameraPosition(
+                    CameraPosition(
+                        LatLng((currentLocation.latitude + currentNearestStore.latitude)/2, (currentLocation.longitude + currentNearestStore.longitude)/2),
+                        6f,
+                        0f,
+                        0f
+                    )
+                ),
+                durationMs = 1000
+            )
+        }
+
+        Log.d(
+            "NearestStoreScreen", "Current location is \n" + "lat : ${currentLocation.latitude}\n" +
+                    "long : ${currentLocation.longitude}\n" + "fetched at ${System.currentTimeMillis()}"
         )
-        Log.d("NearestStoreScreen", "Current location is \n" + "lat : ${currentLocation.latitude}\n" +
-                "long : ${currentLocation.longitude}\n" + "fetched at ${System.currentTimeMillis()}")
+
+
+        setNearestStore(currentNearestStore)
     }
 
 
@@ -142,12 +175,33 @@ fun NearestStoreScreen(currentLocation: Location, setCurrentLocation: (Location)
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
-            storesLocation.forEach { location ->
+
+
+            if (nearestStore != null) {
                 Marker(
                     state = MarkerState(
-                        position = location
-                    )
+                        position = nearestStore
+                    ),
+                    title = "Nearest Store"
                 )
+                Marker(
+                    state = MarkerState(
+                        position = LatLng(
+                            currentLocation.latitude,
+                            currentLocation.longitude
+                        )
+                    ),
+                    title = "Current Location",
+                    icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                )
+            } else {
+                storesLocation.forEach { location ->
+                    Marker(
+                        state = MarkerState(
+                            position = location
+                        )
+                    )
+                }
             }
         }
     }
