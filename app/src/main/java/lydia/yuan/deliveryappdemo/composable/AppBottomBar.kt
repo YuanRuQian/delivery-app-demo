@@ -1,8 +1,10 @@
 package lydia.yuan.deliveryappdemo.composable
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Recycling
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -32,11 +34,15 @@ fun AppBottomBar(navController: NavController, currentRoute: String, setCurrentR
     val icons = listOf(
         Icons.Default.Place,
         Icons.Default.Recycling,
+        Icons.Default.Search,
+        Icons.Default.Map
     )
 
     val routes = listOf(
         Screen.NearestStoreScreen.route,
         Screen.CarouselScreen.route,
+        Screen.AddressAutoCompleteScreen.route,
+        Screen.AutoCompleteFragmentScreen.route
     )
 
     val zippedList = icons.zip(routes)

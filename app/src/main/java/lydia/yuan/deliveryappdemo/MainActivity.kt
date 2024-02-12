@@ -1,30 +1,34 @@
 package lydia.yuan.deliveryappdemo
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.libraries.places.api.Places
 import lydia.yuan.deliveryappdemo.composable.DeliveryApp
 import lydia.yuan.deliveryappdemo.ui.theme.DeliveryAppDemoTheme
-import lydia.yuan.deliveryappdemo.viewmodel.LocationViewModel
 
-// TODO: reference: https://stackoverflow.com/a/72586090/10340117
-class MainActivity : ComponentActivity() {
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        val apiKey = BuildConfig.MAPS_API_KEY
+
+        // Log an error if apiKey is not set.
+        if (apiKey.isEmpty()) {
+            Log.e("Places test", "No api key")
+            return
+        }
+
+        // Initialize the SDK
+        Places.initializeWithNewPlacesApiEnabled(applicationContext, apiKey)
+
 
         setContent {
             DeliveryAppDemoTheme {

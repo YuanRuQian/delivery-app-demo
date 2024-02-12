@@ -1,5 +1,6 @@
 package lydia.yuan.deliveryappdemo.composable
 
+import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,16 +16,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.android.libraries.places.api.Places
+import lydia.yuan.deliveryappdemo.BuildConfig
 import lydia.yuan.deliveryappdemo.viewmodel.LocationViewModel
 
+class MyApplication : Application() {
+    lateinit var container: AppContainer
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Places.initializeWithNewPlacesApiEnabled(applicationContext, BuildConfig.MAPS_API_KEY)
+
+        container = DefaultAppContainer(this)
+    }
+}
+
 @Composable
-fun DeliveryApp(locationViewModel: LocationViewModel = viewModel()) {
+fun DeliveryApp(locationViewModel: LocationViewModel = viewModel(factory = LocationViewModel.Factory)) {
     val navController = rememberNavController()
     val startDestination = Screen.NearestStoreScreen.route
     val (currentRoute, setCurrentRoute) = remember { mutableStateOf(Screen.NearestStoreScreen.route) }
 
     val currentLocationData = locationViewModel.currentLocation.collectAsState()
     val currentLocation = currentLocationData.value
+
+    val predictionData = locationViewModel.predictions.collectAsState()
+    val predictions = predictionData.value
 
     Scaffold(
         topBar = {
@@ -51,6 +69,12 @@ fun DeliveryApp(locationViewModel: LocationViewModel = viewModel()) {
                 }
                 composable(Screen.CarouselScreen.route) {
                     CarouselScreen()
+                }
+                composable(Screen.AddressAutoCompleteScreen.route) {
+                    AddressAutoCompleteScreen(onSearchAddressChange = locationViewModel::getPredictions, predictions = predictions)
+                }
+                composable(Screen.AutoCompleteFragmentScreen.route) {
+                    AutoCompleteFragmentScreen()
                 }
             }
         }
