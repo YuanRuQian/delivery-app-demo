@@ -9,7 +9,7 @@ class NetworkPlaceRepository(
         val response = try {
             placeApiServices.getPredictions(input = input)
         } catch (e: Exception) {
-            Log.d("GooglePlacesRepository", "Exception: ${e}")
+            Log.d("GooglePlacesRepository", "Exception: $e")
             return Resource.Error("Failed prediction")
         }
 

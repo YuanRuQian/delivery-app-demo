@@ -2,14 +2,20 @@
 
 ## Features using Google Maps Android SDK
 
-- [ ] Address search bar with autocomplete
-- [ ] Nearest store search map
+### Nearest store search map
+
+![Nearest store search map](./screenshots/nearest_store.gif)
+
+### Address search bar with autocomplete using Places API
+
+![Address search bar with autocomplete using Places API](./screenshots/addr_search_api.gif)
+
+### Address search bar with autocomplete using AutocompleteSupportFragment ( Interpolating XML Fragment with Jetpack Compose )
+
+![Address search bar with autocomplete using AutocompleteSupportFragment](./screenshots/addr_auto_complete_component.gif)
 
 ## UI components
 
-- [ ] Horizontal Pager Carousel ( Material 3, Jetpack Compose )
+### Horizontal Pager Carousel
 
-## App Publishing & Releasing with Google Play Console
-
-- [ ] Publishing app to Google Play Store
-- [ ] Releasing app updates
+![Horizontal Pager Carousel](./screenshots/carousel.gif)

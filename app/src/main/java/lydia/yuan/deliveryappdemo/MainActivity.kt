@@ -1,9 +1,7 @@
 package lydia.yuan.deliveryappdemo
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
