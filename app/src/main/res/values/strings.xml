@@ -2,4 +2,8 @@
     <string name="app_name">Delivery App Demo</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="default_notification_channel_name">test</string>
+    <string name="msg_token_fmt">FCM registration Token: %s</string>
 </resources>

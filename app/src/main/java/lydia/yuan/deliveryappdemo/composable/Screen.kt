@@ -15,6 +15,8 @@ sealed class Screen(
     data object AddressAutoCompleteScreen : Screen("Addr Search")
 
     data object AutoCompleteFragmentScreen : Screen("Addr Auto")
+
+    data object TestFCMScreen : Screen("Test FCM")
 }
 
 

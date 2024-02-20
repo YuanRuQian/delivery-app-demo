@@ -1,5 +1,8 @@
 package lydia.yuan.deliveryappdemo
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
@@ -13,6 +16,28 @@ import lydia.yuan.deliveryappdemo.composable.DeliveryApp
 import lydia.yuan.deliveryappdemo.ui.theme.DeliveryAppDemoTheme
 
 class MainActivity : AppCompatActivity() {
+
+    fun setupNotifications() {
+        // Create channel to show notifications.
+        val channelId = getString(R.string.default_notification_channel_id)
+        val channelName = getString(R.string.default_notification_channel_name)
+        val notificationManager = getSystemService(NotificationManager::class.java)
+        notificationManager?.createNotificationChannel(
+            NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH,
+            ),
+        )
+
+        intent.extras?.let {
+            for (key in it.keySet()) {
+                val value = intent.extras?.getString(key)
+                Log.d(TAG, "Key: $key Value: $value")
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize the SDK
         Places.initializeWithNewPlacesApiEnabled(applicationContext, apiKey)
-
 
         setContent {
             DeliveryAppDemoTheme {

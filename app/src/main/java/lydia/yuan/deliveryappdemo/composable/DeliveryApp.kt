@@ -76,6 +76,9 @@ fun DeliveryApp(locationViewModel: LocationViewModel = viewModel(factory = Locat
                 composable(Screen.AutoCompleteFragmentScreen.route) {
                     AutoCompleteFragmentScreen()
                 }
+                composable(Screen.TestFCMScreen.route) {
+                    TestFCMScreen()
+                }
             }
         }
     }
