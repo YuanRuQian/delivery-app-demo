@@ -50,7 +50,8 @@ fun TestFCMScreen() {
             if (it) {
                 val currentActivity = context as MainActivity
                 currentActivity.setupNotifications()
-                Toast.makeText(context, "Notification permission granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Notification permission granted", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     )
@@ -99,12 +100,32 @@ fun TestFCMScreen() {
         notificationManager.notify(666, notificationBuilder.build())
     }
 
+    fun subscribeToTestTopic() {
+        // [START subscribe_topics]
+        Firebase.messaging.subscribeToTopic(context.getString(R.string.default_notification_channel_name))
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Toast.makeText(context, "Failed to subscribe to test topic", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(context, "Subscribed to test topic", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Button(onClick = { subscribeToTestTopic() }) {
+            Text(text = "Subscribe to Test Topic to Receive Notifications")
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
         Button(onClick = { logToken() }) {
             Text(text = "Log Token ")
         }
