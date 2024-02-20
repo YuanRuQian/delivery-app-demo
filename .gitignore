@@ -15,4 +15,5 @@
 local.properties
 secrets.properties
 local.defaults.properties
+/app/google-services.json
 

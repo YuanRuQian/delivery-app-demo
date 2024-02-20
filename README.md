@@ -19,3 +19,9 @@
 ### Horizontal Pager Carousel
 
 ![Horizontal Pager Carousel](./screenshots/carousel.gif)
+
+### Push Notification from Firebase Cloud Messaging
+
+![Ask Notification Permission and Test Showing Notification](./screenshots/ask_permission_and_test_notif.gif)
+
+![Test Pushing Notification from Firebase Cloud Messaging](./screenshots/push_notification_from_FCM.gif)

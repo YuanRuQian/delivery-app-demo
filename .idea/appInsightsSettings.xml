@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="lydia.yuan.deliveryappdemo" />
+                  <option name="mobileSdkAppId" value="1:157810480454:android:1c21eca09ddc355e568147" />
+                  <option name="projectId" value="delivery-app-demo-34ded" />
+                  <option name="projectNumber" value="157810480454" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
