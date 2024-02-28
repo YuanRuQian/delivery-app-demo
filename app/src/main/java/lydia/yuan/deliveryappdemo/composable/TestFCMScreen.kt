@@ -28,11 +28,14 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
+import com.squareup.picasso.Picasso
 import lydia.yuan.deliveryappdemo.MainActivity
 import lydia.yuan.deliveryappdemo.R
 
 @Composable
-fun TestFCMScreen() {
+fun TestFCMScreen(
+    onNavigateToTestImageCachingScreen: () -> Unit
+) {
 
     val context = LocalContext.current
 
@@ -135,5 +138,14 @@ fun TestFCMScreen() {
         Button(onClick = { showNotification() }) {
             Text(text = "Show Notification")
         }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(onClick = {
+            onNavigateToTestImageCachingScreen()
+        }) {
+            Text(text = "Test Image Caching with AsyncImage")
+        }
+
     }
 }

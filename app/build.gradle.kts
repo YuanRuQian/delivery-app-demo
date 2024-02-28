@@ -54,6 +54,8 @@ android {
 }
 
 dependencies {
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.work:work-runtime:2.9.0")
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
@@ -67,7 +69,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("androidx.compose.ui:ui-viewbinding:1.6.1")
+    implementation("androidx.compose.ui:ui-viewbinding:1.6.2")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("com.google.android.libraries.places:places:3.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")

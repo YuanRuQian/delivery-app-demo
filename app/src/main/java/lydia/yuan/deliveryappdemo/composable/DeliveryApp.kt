@@ -77,7 +77,12 @@ fun DeliveryApp(locationViewModel: LocationViewModel = viewModel(factory = Locat
                     AutoCompleteFragmentScreen()
                 }
                 composable(Screen.TestFCMScreen.route) {
-                    TestFCMScreen()
+                    TestFCMScreen(onNavigateToTestImageCachingScreen = {
+                        navController.navigate(Screen.TestImageCachingWithAsyncImageScreen.route)
+                    })
+                }
+                composable(Screen.TestImageCachingWithAsyncImageScreen.route) {
+                    TestImageCachingWithAsyncImageScreen()
                 }
             }
         }

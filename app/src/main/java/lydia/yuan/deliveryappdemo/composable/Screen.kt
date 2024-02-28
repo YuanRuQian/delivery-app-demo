@@ -17,6 +17,8 @@ sealed class Screen(
     data object AutoCompleteFragmentScreen : Screen("Addr Auto")
 
     data object TestFCMScreen : Screen("Test FCM")
+
+    data object TestImageCachingWithAsyncImageScreen : Screen("Test Image Caching with AsyncImage")
 }
 
 
